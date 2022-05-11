@@ -49,7 +49,7 @@ def main(argv):
     optimizer = torch.optim.Adam(list(net._pyramid.parameters()) + list(net._flow_model.parameters()), lr=1e-4)
 
     os.makedirs('save', exist_ok=True)
-    model_save_path = r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\Data\Save\model.pt'
+    model_save_path = r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\Original-RRN\Data\Save\model.pt'
 
     loss_history = []
     test_loss_history = []
@@ -194,7 +194,7 @@ def main(argv):
         plt.legend(['training loss', 'test photometric loss'])
         plt.show()
 class LungDatasetTest(torch.utils.data.Dataset):
-    def __init__(self, img_path=r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\DATA\Template\MNI152_template', landmarks_path =r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\DATA\SCZ', pair=True, is_training = False):
+    def __init__(self, img_path=r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\Original-RRN\DATA\Template\MNI152_template', landmarks_path =r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\Original-RRN\DATA\SCZ', pair=True, is_training = False):
         super(LungDatasetTest, self).__init__()
         self.img_path = img_path
         self._pair = pair

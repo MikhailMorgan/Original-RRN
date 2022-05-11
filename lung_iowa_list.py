@@ -7,9 +7,9 @@ import nibabel as nib
 import torch.utils.data as data
 import torch
 class LungDataset(data.Dataset):
-    def __init__(self, hr_img_path=r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\DATA\Template\MNI152_template'
+    def __init__(self, hr_img_path=r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\Original-RRN\DATA\Template\MNI152_template'
                 #, mask_path =  '/DATA/HealthyControl/'  #Not doing anything 
-                 , landmarks_path=r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\DATA\SCZ'
+                 , landmarks_path=r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\Original-RRN\DATA\SCZ'
                  , patch = True
                  , pair=False, image_size = 400, is_training = True):
         super(LungDataset, self).__init__()
