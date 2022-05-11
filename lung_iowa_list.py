@@ -7,9 +7,9 @@ import nibabel as nib
 import torch.utils.data as data
 import torch
 class LungDataset(data.Dataset):
-    def __init__(self, hr_img_path=r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\Original-RRN\DATA\Template\MNI152_template'
+    def __init__(self, hr_img_path=r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\Original-RRN\DATA\SCZ'
                 #, mask_path =  '/DATA/HealthyControl/'  #Not doing anything 
-                 , landmarks_path=r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\Original-RRN\DATA\SCZ'
+                 , landmarks_path=r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\Original-RRN\DATA\Template\MNI152_template'
                  , patch = True
                  , pair=False, image_size = 400, is_training = True):
         super(LungDataset, self).__init__()
@@ -40,7 +40,7 @@ class LungDataset(data.Dataset):
                     self._file_names.append((d1, d2))
                     self._file_names.append((d2, d1))
                     d1 = None
-        self._file_names = [self._file_names[i] for i in range(0, len(self._file_names)) if i % 2 == 1]
+        self._file_names = [self._file_names[i] for i in range(0,len(self._file_names)) if i % 2 == 1] # 
         self._file_length = len(self._file_names)
         self.landmarks_names = os.listdir(landmarks_path)
         self.landmarks_names.sort()

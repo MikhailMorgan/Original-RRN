@@ -49,21 +49,21 @@ def main(argv):
     optimizer = torch.optim.Adam(list(net._pyramid.parameters()) + list(net._flow_model.parameters()), lr=1e-4)
 
     os.makedirs('save', exist_ok=True)
-    model_save_path = r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\Original-RRN\Data\Save\model.pt'
+    # model_save_path = r'C:\Users\mikha\OneDrive\Documents\GitHub\Original_Recursive_Refinement_Network\Original-RRN\Data\Save\model.pt'
 
     loss_history = []
     test_loss_history = []
 
-    if FLAGS.continue_training:
-        print('Continuing with model from ' + model_save_path)
+    # if FLAGS.continue_training:
+        # print('Continuing with model from ' + model_save_path)
 
-        checkpoint = torch.load(model_save_path)
+        # checkpoint = torch.load(model_save_path)
 
-        net.load_state_dict(checkpoint['flow_net'])
-        optimizer.load_state_dict(checkpoint['optimizer'])
+        # net.load_state_dict(checkpoint['flow_net'])
+        # optimizer.load_state_dict(checkpoint['optimizer'])
 
-        loss_history = checkpoint['loss_history']
-        test_loss_history = checkpoint['test_loss_history']
+        # loss_history = checkpoint['loss_history']
+        # test_loss_history = checkpoint['test_loss_history']
 
     def ResizeTransform(flow, target_shape):
         device = flow.device
@@ -149,9 +149,11 @@ def main(argv):
         net.train()
         losses = []
         for batch in train_loader:
-            img1 = batch['voxel1_hr'].cuda(non_blocking=True).to(torch.float32)
-            img2 = batch['voxel2_hr'].cuda(non_blocking=True).to(torch.float32)
-
+            # img1 = batch['voxel1_hr'].cuda(non_blocking=True).to(torch.float32)
+            # img2 = batch['voxel2_hr'].cuda(non_blocking=True).to(torch.float32)
+            img1 = batch['voxel1_hr'].to(torch.float32)
+            img2 = batch['voxel2_hr'].to(torch.float32)
+            
             clamp_min = 80
             clamp_max = 900
             intrange = clamp_max - clamp_min
@@ -178,15 +180,15 @@ def main(argv):
         test_loss_history.append(test_loss)
         print(
             "Epoch {}".format(epoch))
-        if epoch % 2 == 1:
-            print("Saving model to " + model_save_path)
+        # if epoch % 2 == 1:
+            # print("Saving model to " + model_save_path)
 
-            torch.save({
-                'flow_net': net.state_dict(),
-                'optimizer': optimizer.state_dict(),
-                'loss_history': loss_history,
-                'test_loss_history': test_loss_history,
-            }, model_save_path)
+            # torch.save({
+                # 'flow_net': net.state_dict(),
+                # 'optimizer': optimizer.state_dict(),
+                # 'loss_history': loss_history,
+                # 'test_loss_history': test_loss_history,
+            # }, model_save_path)
 
         plt.figure()
         plt.plot(range(len(loss_history)), [x * 1e6 for x in loss_history])
